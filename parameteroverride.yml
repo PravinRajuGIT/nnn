@@ -1,0 +1,39 @@
+variables:
+- group: 'azureresourcenonprod'
+#- name: subscription
+#  value: 'deepakspnkirt'
+
+stages:
+- stage: Dev
+  displayName: Dev
+  variables:
+    - group: 'azureresourcenonprod'
+  jobs:
+  - job:
+    displayName: 'Test Variable Library Groups - Dev'
+    steps:
+    - task: AzurePowerShell@5
+      displayName: 'Test Variable Library Group Override'
+      inputs:
+        azureSubscription: '$(subscription)'
+        ScriptType: 'InlineScript'
+        Inline: |
+          Write-Output "subscription: $(subscription)"
+        azurePowerShellVersion: 'LatestVersion'
+
+- stage: PROD
+  displayName: PROD
+  variables:
+    - group: 'azureresourceprod'
+  jobs:
+  - job:
+    displayName: 'Test Variable Library Groups - Prod'
+    steps:
+    - task: AzurePowerShell@5
+      displayName: 'Test Variable Library Group Override'
+      inputs:
+        azureSubscription: '$(subscription)'
+        ScriptType: 'InlineScript'
+        Inline: |
+            Write-Output "subscription: $(subscription)"
+        azurePowerShellVersion: 'LatestVersion'
