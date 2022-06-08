@@ -1,5 +1,5 @@
 variables:
-- group: 'azureresourcenonprod'
+- group: 'azureresourceprod'
 #- name: subscription
 #  value: 'deepakspnkirt'
 
@@ -7,7 +7,7 @@ stages:
 - stage: Dev
   displayName: Dev
   variables:
-    - group: 'azureresourcenonprod'
+    - group: 'azureresourceprod'
   jobs:
   - job:
     displayName: 'Test Variable Library Groups - Dev'
@@ -24,7 +24,7 @@ stages:
 - stage: PROD
   displayName: PROD
   variables:
-    - group: 'azureresourceprod'
+    - group: 'azureresourcenonprod'
   jobs:
   - job:
     displayName: 'Test Variable Library Groups - Prod'
