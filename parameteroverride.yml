@@ -15,7 +15,7 @@ stages:
     - task: AzurePowerShell@5
       displayName: 'Test Variable Library Group Override'
       inputs:
-        azureSubscription: '$(subscription)'
+      #  azureSubscription: '$(subscription)'
         ScriptType: 'InlineScript'
         Inline: |
           Write-Output "subscription: $(subscription)"
