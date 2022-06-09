@@ -18,7 +18,7 @@ stages:
       #  azureSubscription: '$(subscription)'
       #  ScriptType: 'InlineScript'
       #  Inline: |
-          Write-Output "subscription: $(subscription)"
+        Write-Output "subscription: $(subscription)"
         azurePowerShellVersion: 'LatestVersion'
 
 - stage: PROD
