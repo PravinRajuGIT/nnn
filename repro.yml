@@ -38,15 +38,5 @@ jobs:
     persistCredentials: true
 
   - ${{ if in(parameters.operation, 'create', 'update') }}:
-    - bash: |
+    - bash:
        echo env: ${{ parameters.env }}
-
-  # checkout/clone scripts from repository (https://geico.visualstudio.com/DSAT-Data-Pipeline/_git/kc-pipeline-scripts)
-  #- ${{ if in(parameters.operation, 'create', 'update') }}:
-    #- bash: |
-       #echo "-------------------------------------------------------------------------------------------"
-       #echo "print user runtime parameters"
-       #echo "-------------------------------------------------------------------------------------------"
-       #echo env: ${{ parameters.env }}
-	   #echo connectclustername: ${{ parameters.connectclustername }}
-	   #echo operation: ${{ parameters.operation }}
