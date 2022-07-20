@@ -1,0 +1,52 @@
+parameters:
+- name: env
+  displayName: Environment
+  type: string
+  default: sb1
+  values:
+  - sb1
+  - sb2
+
+- name: connectclustername
+  displayName: Connect Cluster Name
+  type: string
+  default: connect
+  values:
+  - connect
+  - connect-atlas
+
+- name: operation
+  displayName: Operation
+  type: string
+  default: status
+  values:
+  - status
+  - list
+  - create
+
+
+
+trigger: none
+
+jobs:
+- job: Connector_Automation
+  displayName: "Connector Automation"
+
+
+  steps:
+  - checkout: self
+    persistCredentials: true
+
+  - ${{ if in(parameters.operation, 'create', 'update') }}:
+    - bash: |
+       echo env: ${{ parameters.env }}
+
+  # checkout/clone scripts from repository (https://geico.visualstudio.com/DSAT-Data-Pipeline/_git/kc-pipeline-scripts)
+  #- ${{ if in(parameters.operation, 'create', 'update') }}:
+    #- bash: |
+       #echo "-------------------------------------------------------------------------------------------"
+       #echo "print user runtime parameters"
+       #echo "-------------------------------------------------------------------------------------------"
+       #echo env: ${{ parameters.env }}
+	   #echo connectclustername: ${{ parameters.connectclustername }}
+	   #echo operation: ${{ parameters.operation }}
