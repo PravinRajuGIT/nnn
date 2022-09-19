@@ -1,0 +1,23 @@
+trigger: none
+
+strategy:
+  matrix:
+    win2022:
+      agentImage: windows-2022
+    win2019:
+      agentImage: windows-2019
+    ubuntu1804:
+      agentImage: ubuntu-18.04
+    ubuntu2004:
+      agentImage: ubuntu-20.04
+    ubuntu2204:
+      agentImage: ubuntu-22.04
+
+pool:
+  vmImage: $[ variables['agentImage'] ]
+
+container: openjdk:17.0.1
+
+steps:
+- checkout: none
+- script: echo "Hello World!"
