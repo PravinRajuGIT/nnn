@@ -1,0 +1,19 @@
+trigger: none
+
+#pool:
+  #name: Repro # Name of a pool. 
+  #demands: QWERTYUIOP001_AzurePool_Agent5
+
+#pool: Repro
+  #agent.name: QWERTYUIOP001_AzurePool_Agent5
+
+pool: Private Agent
+# Delete files
+# Delete folders, or files matching a pattern
+
+steps:
+- task: DeleteFiles@1
+  inputs:
+    SourceFolder: $(Agent.WorkFolder)
+    Contents: '.taskkey' 
+    RemoveSourceFolder: # Optional
