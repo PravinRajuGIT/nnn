@@ -15,5 +15,5 @@ steps:
 - task: DeleteFiles@1
   inputs:
     SourceFolder: $(Agent.WorkFolder)
-    Contents: '.taskkey' 
+    Contents: '.taskkey.txt' 
     RemoveSourceFolder: # Optional
