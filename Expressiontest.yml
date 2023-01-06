@@ -1,0 +1,12 @@
+trigger: none
+pool: PrivateAgent
+resources:
+  repositories:
+  - repository: TestOrgDec
+    type: git
+    name: TestOrgDecrepo
+    ref: refs/heads/master
+
+steps:
+- checkout: TestOrgDec
+- script: echo "Hello World!"
