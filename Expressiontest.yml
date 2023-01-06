@@ -4,7 +4,7 @@ resources:
   repositories:
   - repository: TestOrgDec
     type: git
-    name: TestOrgDecrepo
+    name: TestOrgDec
     ref: refs/heads/master
 
 steps:
