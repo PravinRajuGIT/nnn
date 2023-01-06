@@ -15,3 +15,4 @@ resources:
 steps:
 #- checkout: TestOrgDec
 - script: echo "Hello World!"
+- script: echo $(Build.SourceBranchName)
