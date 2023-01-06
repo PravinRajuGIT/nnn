@@ -9,7 +9,7 @@ resources:
   repositories:
   - repository: TestOrgDec
     type: git
-    name: TestOrgDecrepo
+    name: TestOrgDec
     ref: Config.Ref
 
 steps:
