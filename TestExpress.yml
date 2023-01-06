@@ -13,5 +13,5 @@ resources:
     ref: C.Ref
 
 steps:
-- checkout: TestOrgDec
+#- checkout: TestOrgDec
 - script: echo "Hello World!"
