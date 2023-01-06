@@ -1,5 +1,6 @@
 trigger: none
-pool: PrivateAgent
+pool:
+  vmImage: ubuntu-latest
 resources:
   repositories:
   - repository: TestOrgDec
