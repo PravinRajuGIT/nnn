@@ -1,0 +1,17 @@
+trigger: none
+pool:
+   vmImage: ubuntu-latest
+
+variables:
+- name: C.Ref
+  value: refs/heads/BranchTest
+resources:
+  repositories:
+  - repository: TestOrgDec
+    type: git
+    name: TestOrgDec
+    ref: ${{ variables['C.Ref'] }}
+
+steps:
+- script: echo "Hello World!"
+- script: echo $(Build.SourceBranchName)
