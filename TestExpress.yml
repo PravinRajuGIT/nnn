@@ -3,14 +3,14 @@ pool:
    vmImage: ubuntu-latest
 
 variables:
-- name: Config.Ref
-  value: refs/heads/tagtest
+- name: C.Ref
+  value: refs/heads/BranchTest
 resources:
   repositories:
   - repository: TestOrgDec
     type: git
     name: TestOrgDec
-    ref: Config.Ref
+    ref: C.Ref
 
 steps:
 - checkout: TestOrgDec
