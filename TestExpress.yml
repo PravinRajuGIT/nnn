@@ -16,3 +16,4 @@ steps:
 #- checkout: TestOrgDec
 - script: echo "Hello World!"
 - script: echo $(Build.SourceBranchName)
+- script: echo $(C.Ref)
