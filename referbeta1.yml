@@ -1,0 +1,16 @@
+trigger:
+  none
+
+resources:
+  repositories:
+  - repository: Siprotec5PipelineTemplatesdummy
+    type: git
+    name: demo adorepo/Siprotec5PipelineTemplatesdummy
+    endpoint: Conn Base to Target
+    ref: refs/heads/main 
+    
+
+#extends:
+steps:
+  - checkout: Siprotec5PipelineTemplatesdummy
+  - template: templates/hello-beta1.yml@Siprotec5PipelineTemplatesdummy
