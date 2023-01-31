@@ -7,9 +7,12 @@ variables:
   value: refs/heads/tagtest
 resources:
   repositories:
+  #- repository: TestOrgDec
   - repository: TestOrgDec
     type: git
-    name: TestOrgDec
+    #name: TestOrgDec
+    name: childrepo
+    #ref: Config.Ref
     ref: Config.Ref
 
 steps:
