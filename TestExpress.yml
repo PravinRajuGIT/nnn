@@ -25,4 +25,5 @@ resources:
 
 steps:
 - checkout: TestOrgDec
+- checkout: childrepo
 - script: echo "Hello World!"
