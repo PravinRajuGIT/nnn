@@ -10,6 +10,14 @@ resources:
   #- repository: TestOrgDec
   - repository: TestOrgDec
     type: git
+    name: TestOrgDec
+    #name: childrepo
+    #ref: Config.Ref
+    ref: Config.Ref
+
+  #- repository: TestOrgDec
+  - repository: TestOrgDec
+    type: git
     #name: TestOrgDec
     name: childrepo
     #ref: Config.Ref
