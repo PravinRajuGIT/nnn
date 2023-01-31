@@ -16,7 +16,7 @@ resources:
     ref: Config.Ref
 
   #- repository: TestOrgDec
-  - repository: TestOrgDec
+  - repository: childrepo
     type: git
     #name: TestOrgDec
     name: childrepo
