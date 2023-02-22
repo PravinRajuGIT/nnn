@@ -10,7 +10,7 @@ parameters:
 trigger: none
  
 steps:
-  - checkout: TestOrgDec
+  - checkout: self
   - task: Bash@3
     displayName: 'Test Pipeline for Bash'
     inputs:
