@@ -20,7 +20,6 @@ pool:
     vmImage: 'ubuntu-16.04'
   variables:
     myVarFromJobA: $[ dependencies.A.outputs['setvarStep.myOutputVar'] ]  # map in the variable
-                                                                          # remember, expressions require single quotes
   steps:
   - script: echo $(myVarFromJobA)
     name: echovar
