@@ -1,0 +1,15 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+ - stage: Deploy
+   jobs:
+   - job: Deploy
+     pool:
+       vmImage: 'vs2017-win2016'
+     steps:
+     - powershell: 
+       displayName: 'PowerShell Script'
+       Write-Host "Hello World"
