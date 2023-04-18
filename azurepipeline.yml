@@ -11,3 +11,9 @@ stages:
       steps:
       - script: echo Helllllllo!
       displayName: inline script
+  - stage: stagedepart
+    jobs:
+    - job: jobdepart
+      steps:
+      - script: echo Helllllllo departt!
+      displayName: inline script
