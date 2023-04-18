@@ -5,9 +5,9 @@ pool:
   vmImage: 'ubuntu-latest'
 
 stages:
-  - stage: A
+  - stage: stagedep
     jobs:
-    - job: Job A
+    - job: jobdep
       steps:
       - script: echo Helllllllo!
       displayName: inline script
