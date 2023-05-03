@@ -1,0 +1,13 @@
+trigger: none
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  environments: integration1, integration2
+jobs:
+  - job: JobforCD
+    steps:
+    - ${{ each env in split(variables.environments, ', ') }}:
+      - script: echo ${{env}}
+#      - script: ./runTest.sh -e ${{ env }};
