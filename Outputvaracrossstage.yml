@@ -1,0 +1,27 @@
+stages:
+- stage: A
+  jobs:
+  - job: A1
+    steps:
+    - task: AzurePowerShell@5
+      displayName: 'Azure PowerShell script: InlineScript'
+      inputs:
+        azureSubscription: 'Automatic service connection'
+        ScriptType: InlineScript
+        Inline: |
+         # You can write your azure powershell scripts inline here. 
+         # You can also pass predefined and custom variables to this script using arguments
+     
+         $testvar = ' test test'
+         Write-Host "##vso[task.setvariable variable=testvar;isOutput=true]$testvar"
+    azurePowerShellVersion: LatestVersion
+
+- stage: B
+  dependsOn: A
+  jobs:
+  - job: B1
+    variables:
+      myStageAVar: $[stageDependencies.A.A1.outputs['testvar.testvar']]
+    steps:
+    - powershell: Write-Host "$(myStageAVar)"
+
