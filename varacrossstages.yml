@@ -1,3 +1,8 @@
+trigger: none
+
+pool:
+  vmImage: windows-latest
+
 stages:
 - stage: A
   jobs:
@@ -14,7 +19,7 @@ stages:
      
          #$testvar = ' test test'
          Write-Host "##vso[task.setvariable variable=testvar;isOutput=true]testtestest"
-    azurePowerShellVersion: LatestVersion
+        azurePowerShellVersion: LatestVersion
 
 - stage: B
   dependsOn: A
