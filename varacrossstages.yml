@@ -8,6 +8,8 @@ stages:
   jobs:
   - job: A1
     steps:
+    - powershell: 
+      name: BaseStep
     - task: AzurePowerShell@5
       displayName: 'Azure PowerShell script: InlineScript'
       inputs:
@@ -26,6 +28,6 @@ stages:
   jobs:
   - job: B1
     variables:
-      myStageAVar: $[stageDependencies.A.A1.outputs['testvar.testvar']]
+      myStageAVar: $[stageDependencies.A.A1.outputs['steps.task.testvar']]
     steps:
     - powershell: Write-Host "$(myStageAVar)"
