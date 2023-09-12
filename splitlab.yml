@@ -12,6 +12,7 @@ parameters:
 
 trigger:
 - main
+#just added the line to trigger the CI
 
 steps:
 - ${{ each env in parameters.environments }}:
