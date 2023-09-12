@@ -10,6 +10,7 @@ stages:
     steps:
     - task: AzurePowerShell@5
       displayName: 'Azure PowerShell script: InlineScript'
+      name: powershell
       inputs:
         azureSubscription: 'Automatic service connection'
         ScriptType: InlineScript
@@ -26,7 +27,7 @@ stages:
   jobs:
   - job: B1
     variables:
-      myStageAVar: $[stageDependencies.A.A1.outputs['testvar.testvar']]
+      myStageAVar: $[stageDependencies.A.A1.outputs['powershell.testvar']]
     steps:
     - powershell: Write-Host "$(myStageAVar)"
 
