@@ -13,4 +13,4 @@ resources:
 #extends:
 steps:
   - checkout: childrepo
-  - template: templates/hello-beta2.yml@childrepo
+  - template: templates/hello-beta1.yml@childrepo
