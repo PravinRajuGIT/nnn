@@ -10,17 +10,17 @@ pool:
 resources:
   repositories:
     - repository: ExternalRepo  # Custom alias for the external repository
-      type: 'git'              # Type of repository (Azure DevOps Git)
-      name: 'TestOrgDec/ExternalRepo'  # Replace with the external repository's URL
-      ref: 'refs/heads/main'    # Branch containing the template
+      type: git              # Type of repository (Azure DevOps Git)
+      name: TestOrgDec/ExternalRepo  # Replace with the external repository's URL
+      ref: refs/heads/main    # Branch containing the template
+      #ref: https://TestOrgDec2020@dev.azure.com/TestOrgDec2020/TestOrgDec/_git/ExternalRepo/main
 
 jobs:
 - job: Build
   displayName: 'Build'
   steps:
   - checkout: self
-
-  - template: ExternalRepo/Templates/my-template.yml@ExternalRepo  # Reference the external template
+  - template: ExternalRepo/Templates/my-template.yml@ExternalRepo
     parameters:
-      param1: 'Value1'
-      param2: 'Value2'
+      param1: 'Value 1'
+      param2: 'Value 2'
