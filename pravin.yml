@@ -12,7 +12,7 @@ resources:
     - repository: ExternalRepo  # Custom alias for the external repository
       type: git              # Type of repository (Azure DevOps Git)
       name: TestOrgDec/ExternalRepo  # Replace with the external repository's URL
-      ref: refs/heads/main    # Branch containing the template
+      #ref: refs/heads/main    # Branch containing the template
       #ref: https://TestOrgDec2020@dev.azure.com/TestOrgDec2020/TestOrgDec/_git/ExternalRepo/main
 
 jobs:
