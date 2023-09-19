@@ -6,7 +6,7 @@ resources:
   - repository: childrepo
     type: git
     name: TestOrgDec/childrepo
-    endpoint: Conn Base to Target
+    endpoint: Automatic service connection
     ref: refs/heads/main 
     
 
