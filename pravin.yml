@@ -24,25 +24,3 @@ jobs:
     parameters:
       param1: 'Value1'
       param2: 'Value2'
-In this script:
-
-The resources section specifies the external repository (ExternalRepo) and its location (YourOrganization/ExternalRepo) using a custom alias.
-The jobs section contains a job named "Build" that references the external template using the template keyword. The template path is specified as ExternalRepo/Templates/my-template.yml@ExternalRepo, where my-template.yml is the template file within the external repository.
-Template in External Repository (my-template.yml):
-
-Here's an example of the template (my-template.yml) in the external repository:
-
-yaml
-Copy code
-parameters:
-- name: param1
-  type: string
-- name: param2
-  type: string
-
-jobs:
-- job: ExternalTemplateJob
-  displayName: 'External Template Job'
-  steps:
-  - script: echo "Param 1: ${{ parameters.param1 }}"
-  - script: echo "Param 2: ${{ parameters.param2 }}"
