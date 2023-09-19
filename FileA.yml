@@ -1,8 +1,8 @@
 resources:
   repositories:
-  - repository: templates
+  - repository: Templates
     type: git
-    name: templates
+    name: Templates
 
 steps:
 - checkout: self
