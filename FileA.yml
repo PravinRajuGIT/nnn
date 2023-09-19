@@ -1,0 +1,12 @@
+resources:
+  repositories:
+  - repository: templates
+    type: git
+    name: templates
+
+steps:
+- checkout: self
+  displayName: 'Checkout sources'
+  persistCredentials: true
+
+- template: templates/prepare_tooling.yml
