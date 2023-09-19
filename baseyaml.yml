@@ -3,14 +3,14 @@ trigger:
 
 resources:
   repositories:
-  - repository: childrepo
+  - repository: childrepo2
     type: git
-    name: TestOrgDec/childrepo
+    name: TestOrgDec/childrepo2
     endpoint: Automatic service connection
     ref: refs/heads/main 
     
 
 #extends:
 steps:
-  - checkout: childrepo
-  - template: templates/hello-beta1.yml@childrepo
+  - checkout: childrepo2
+  - template: templates/hello-beta1.yml@childrepo2
