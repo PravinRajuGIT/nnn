@@ -1,0 +1,16 @@
+trigger:
+  none
+
+resources:
+  repositories:
+  - repository: childrepo
+    type: git
+    name: TestOrgDec/childrepo
+    endpoint: Conn Base to Target
+    ref: refs/heads/main 
+    
+
+#extends:
+steps:
+  - checkout: childrepo
+  - template: templates/hello-beta2.yml@childrepo
