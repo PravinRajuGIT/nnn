@@ -18,3 +18,4 @@ steps:
 - ${{ each env in parameters.environments }}:
   - ${{ each resourceId in parameters.resourceIds }}:
       - script: echo ${{ replace(split(resourceId, '/')[8], '-', '_') }}_${{ env }}
+# commneting for test
