@@ -7,7 +7,7 @@ steps:
 - task: AzureCLI@2
   displayName: Deleting unused ADF resources test scenario
   inputs:
-    azureSubscription: 'Manual Service Connection'
+    azureSubscription: 'Manual SC'
     scriptType: "pscore"
     scriptLocation: "inlineScript"
     inlineScript: |
