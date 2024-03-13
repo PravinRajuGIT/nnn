@@ -11,7 +11,7 @@ steps:
     scriptType: "pscore"
     scriptLocation: "inlineScript"
     inlineScript: |
-      Install-Module Az.DataFactory
+      Install-Module Az.Accounts
   env:
     AZURE_SERVICE_PRINCIPAL: d57f4b3f-6e6a-4a71-a166-7a9d98daa3ca
     AZURE_SERVICE_PRINCIPAL_PASSWORD: 5-i8Q~3cScOhKORuU2R0t_lk36j0w-~JJEgGfcPO
