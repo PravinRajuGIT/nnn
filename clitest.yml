@@ -1,7 +1,9 @@
 trigger: none
 
 pool:
-  vmImage: 'windows-latest' # Or specify other Microsoft-hosted agent
+ name: Private Agent
+#pool:
+  #vmImage: 'windows-latest' # Or specify other Microsoft-hosted agent
 
 steps:
 - task: AzureCLI@2
