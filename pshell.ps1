@@ -1,0 +1,30 @@
+trigger: none
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- task: PowerShell@2
+  displayName: Deleting unused ADF resources test scenario
+  inputs:
+    azureSubscription: 'YourAzureSubscriptionName'  # This parameter is not needed for PowerShell tasks
+    scriptType: 'InlineScript'
+    inlineScript: |
+      # Your PowerShell script here
+      # Login using service principal
+      az login --service-principal -u $env:AZURE_SERVICE_PRINCIPAL -p $env:AZURE_SERVICE_PRINCIPAL_PASSWORD --tenant $env:AZURE_TENANT
+      
+      # Set Azure subscription
+      az account set --subscription "Visual Studio Enterprise Subscription"
+      
+      # List all Azure Data Factory resources
+      Install-Module Az.DataFactory
+      
+      # You can delete specific resources using their IDs or names
+      # Example:
+      # az adf delete --name "YourDataFactoryName" --resource-group "YourResourceGroup"
+      # az adf delete --ids /subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroup/providers/Microsoft.DataFactory/factories/YourDataFactoryName
+  env:
+    AZURE_SERVICE_PRINCIPAL: d57f4b3f-6e6a-4a71-a166-7a9d98daa3ca
+    AZURE_SERVICE_PRINCIPAL_PASSWORD: 5-i8Q~3cScOhKORuU2R0t_lk36j0w-~JJEgGfcPO
+    AZURE_TENANT: dedb034a-eff6-4ec9-a7c7-318ef7f9a2e9
