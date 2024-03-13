@@ -1,0 +1,14 @@
+trigger: none
+
+pool:
+  vmImage: 'windows-latest' # Or specify other Microsoft-hosted agent
+
+steps:
+- task: AzureCLI@2
+  displayName: Deleting unused ADF resources test scenario
+  inputs:
+    azureSubscription: 'Manual SC'
+    scriptType: "pscore"
+    scriptLocation: "inlineScript"
+    inlineScript: |
+      Install-Module Az.DataFactory
