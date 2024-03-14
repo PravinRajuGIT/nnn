@@ -4,6 +4,7 @@ pool:
  name: Linux Agent Pool
 #pool:
   #vmImage: 'windows-latest' # Or specify other Microsoft-hosted agent - commenting this line for testing purpose
+  #work on a repro
 
 steps:
 - task: AzureCLI@2
