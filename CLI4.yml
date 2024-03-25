@@ -1,0 +1,28 @@
+trigger: none
+
+pool:
+  vmImage: 'ubuntu-latest'
+#pool:
+ #name: Linux Agent Pool
+
+steps:
+- task: AzureCLI@2
+  displayName: Deleting unused ADF resources test scenario
+  inputs:
+    azureSubscription: 'OIDC'
+    scriptType: "pscore"
+    scriptLocation: "inlineScript"
+    inlineScript: |
+      # Login using service principal
+      az login --service-principal -u ef91fc4a-5f5a-43ec-a166-99afdf85b99f -p 156c167a-6880-4c5f-ba40-164dd7db1cde --tenant dedb034a-eff6-4ec9-a7c7-318ef7f9a2e9
+      
+      # Set Azure subscription
+      az account set --subscription "Visual Studio Enterprise Subscription"
+      
+      # List all Azure Data Factory resources
+      Install-Module Az.DataFactory
+      
+      # You can delete specific resources using their IDs or names
+      # Example:
+      # az adf delete --name "YourDataFactoryName" --resource-group "YourResourceGroup"
+      # az adf delete --ids /subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroup/providers/Microsoft.DataFactory/factories/YourDataFactoryName
