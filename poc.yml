@@ -1,0 +1,29 @@
+trigger: none
+
+variables:
+- group: GitHubSecrets
+
+resources:
+  repositories:
+    - repository: RepoTest
+      name: RepoTest
+      type: github
+      ref: master  
+
+pool: Private Agent  #CHANGE_ME  with your ADO devops Agent Pool#
+jobs:
+  - job: Test_Build
+    displayName: 'Build'
+    steps:
+      - bash: |
+          echo "********** You are using Build Pipeline Version 2 **************"
+          echo "test successful"
+        displayName: Display Pipeline Version
+
+      - bash: |
+          git config --global url."https://$(github-pat)@github.com/".insteadOf "https://github.com/"
+        displayName: 'Configure Git to use PAT'
+        env:
+          GITHUB_PAT: $(github-pat)
+
+      - template: testpipeline.yml
