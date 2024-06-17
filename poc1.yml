@@ -1,0 +1,35 @@
+variables:
+- group: GitHubSecrets
+
+pool: TestAgentPool  #CHANGE_ME  with your ADO devops Agent Pool#
+
+resources:
+  repositories:
+    - repository: RepoTest
+      type: github
+      endpoint: 'dummy-endpoint'  # Placeholder to satisfy YAML structure
+      name: RepoTest
+      ref: master  
+
+jobs:
+  - job: Test_Build
+    displayName: 'Build'
+    steps:
+      - bash: |
+          echo "********** You are using Build Pipeline Version 2 **************"
+          echo "test successful"
+        displayName: Display Pipeline Version
+
+      - checkout: self
+        lfs: false
+        clean: true
+        persistCredentials: true
+
+      - bash: |
+          git remote set-url origin https://$(github-pat)@github.com/RepoTest.git
+          git pull origin master
+        displayName: 'Configure Git to use PAT'
+        env:
+          GITHUB_PAT: $(github-pat)
+
+      - template: azure-pipeline.yml@RepoTest
