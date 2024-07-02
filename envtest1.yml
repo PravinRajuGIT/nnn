@@ -1,0 +1,28 @@
+trigger: none
+
+pool:
+  vmImage: 'windows-latest'
+
+# Define variables if needed
+variables:
+  environmentName: 'Pre-Production'
+
+# Define stages and jobs
+jobs:
+- deployment: DeployToProduction
+  displayName: 'Deploy to Production'
+  environment:
+    name: $(environmentName)
+    resourceType: VirtualMachine
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - task: PowerShell@2
+          inputs:
+            targetType: 'inline'
+            script: |
+              # Create a folder in C drive
+              New-Item -ItemType Directory -Path "C:\MyFolder"
+
+          displayName: 'Create Folder in C Drive'
