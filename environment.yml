@@ -9,8 +9,8 @@ variables:
 
 # Define stages and jobs
 jobs:
-- deployment: DeployTo Pre Production
-  displayName: 'Deploy to Pre Production'
+- deployment: DeployToPreProduction
+  displayName: 'Deploy to PreProduction'
   environment:
     name: $(environmentName)
     resourceType: VirtualMachine
