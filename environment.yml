@@ -1,7 +1,6 @@
 trigger: none
 
-pool:
-  vmImage: 'Private Agent'
+pool: 'Private Agent'
 
 # Define variables if needed
 variables:
