@@ -1,7 +1,7 @@
 trigger: none
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'Private Agent'
 
 # Define variables if needed
 variables:
