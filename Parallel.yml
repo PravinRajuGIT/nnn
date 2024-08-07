@@ -1,0 +1,24 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+- job: Job1
+  displayName: 'First Job'
+  steps:
+  - script: |
+      echo "Running Job 1"
+      # Simulate a failure
+      exit 1
+    displayName: 'Run script for Job 1'
+
+- job: Job2
+  displayName: 'Second Job'
+  steps:
+  - script: |
+      echo "Running Job 2"
+      # Simulate success
+      exit 0
+    displayName: 'Run script for Job 2'
