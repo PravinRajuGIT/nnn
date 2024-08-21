@@ -10,8 +10,7 @@ parameters:
   - prod1
   - prod2
 
-trigger:
-- main
+trigger: none
 #just added the line to trigger the CI
 
 steps:
