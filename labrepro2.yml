@@ -1,0 +1,55 @@
+trigger: none  # Adjust the branch as needed
+
+pool: Private Agent
+
+steps:
+- checkout: self  # Checkout the code from the repository
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Define the repository root directory
+      $repoRoot = "$(Build.SourcesDirectory)"
+
+      # Define the folder where you want to inject the file (adjust folder path as needed)
+      $targetFolder = Join-Path $repoRoot "testfolder"
+
+      # Ensure the folder exists (create it if it doesn't)
+      if (-not (Test-Path -Path $targetFolder)) {
+          New-Item -ItemType Directory -Path $targetFolder
+          Write-Host "Created folder: $targetFolder"
+      }
+
+      # Define the file path and content to inject
+      $filePath = Join-Path $targetFolder "injectedFile.txt"
+      $fileContent = "This file was dynamically injected during the pipeline run."
+
+      # Inject or overwrite the file
+      Set-Content -Path $filePath -Value $fileContent -Force
+      Write-Host "Injected file: $filePath"
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Navigate to the repository root
+      cd "$(Build.SourcesDirectory)"
+
+      # Configure Git to use OAuth token for authentication
+      git config --global user.email "pravin.juar@gmail.com"
+      git config --global user.name "CPR"
+      
+      # Use the Azure DevOps OAuth token to authenticate
+      git remote set-url origin https://$(System.AccessToken)@dev.azure.com/TestOrgDec2020/TestOrgDec/_git/TestOrgDec
+
+      # Add the changes (new/modified files)
+      git add .
+
+      # Commit the changes
+      git commit -m "Injected file during pipeline run"
+
+      # Push the changes back to the repository
+      git push origin HEAD:main  # Adjust the branch name as needed
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
