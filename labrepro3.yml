@@ -1,7 +1,8 @@
 
 trigger: none # Adjust the branch as needed
 
-pool: Private Agent
+#pool: Private Agent
+pool: Interactive Agent Pool
 
 steps:
 - checkout: self  # Checkout the code from the repository
