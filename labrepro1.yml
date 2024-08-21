@@ -1,7 +1,7 @@
 trigger:
 - main  # Adjust the branch name as needed
 
-pool: PrivateAgent
+pool: Private Agent
 
 steps:
 - checkout: self  # Checkout the code from the repository
