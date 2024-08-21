@@ -1,0 +1,55 @@
+
+trigger: none # Adjust the branch as needed
+
+pool: Private Agent
+
+steps:
+- checkout: self  # Checkout the code from the repository
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Define the repository root directory
+      $repoRoot = "$(Build.SourcesDirectory)"
+
+      # Define the folder name you're searching for
+      $folderNameToFind = "testfolder"
+
+      # Search for the folder in the repository
+      $folder = Get-ChildItem -Path $repoRoot -Directory -Recurse | Where-Object { $_.Name -eq $folderNameToFind }
+
+      if ($folder) {
+          # Folder found, build the full path for the file you want to inject
+          $fullPath = Join-Path $folder.FullName "injectedFile.txt"
+
+          # Create or inject the file
+          New-Item -ItemType File -Path $fullPath -Force -Value "This is a dynamically created file during pipeline run."
+
+          Write-Host "File created successfully at: $fullPath"
+      } else {
+          Write-Host "Folder '$folderNameToFind' not found."
+          exit 1  # Optionally fail the pipeline if the folder is not found
+      }
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Navigate to the repository root
+      cd "$(Build.SourcesDirectory)"
+
+      # Configure Git credentials
+      git config user.email "pravin.juar@gmail.com"
+      git config user.name "CPR"
+
+      # Stage the new or modified file(s)
+      git add .
+
+      # Commit the changes
+      git commit -m "Injected file during pipeline run"
+
+      # Push the changes back to the repository
+      git push origin HEAD:main  # Adjust the branch name if needed
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)  # Use the OAuth token for authentication
