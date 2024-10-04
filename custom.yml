@@ -1,9 +1,7 @@
-
-trigger:
-- main  # Or specify your branch
+trigger: none  # Or specify your branch
 
 pool:
-  name: 'MyAgentPool'  # Replace with your agent pool name
+  name: 'Default'  # Replace with your agent pool name
 
 variables:
   SiteName: 'MyWebsite'  # Replace with your site name
