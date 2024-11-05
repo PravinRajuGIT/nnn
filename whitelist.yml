@@ -1,7 +1,7 @@
 trigger: none
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 steps:
 - task: UseDotNet@2
@@ -10,14 +10,13 @@ steps:
     version: '6.x'
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
-- task: AzureCLI@2
+- task: AzurePowerShell@5
   inputs:
-    azureSubscription: 'Automaticserviceconnection'
-    scriptType: 'ps'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      # Authenticate to Azure
-      Connect-AzAccount -UseDeviceAuthentication
+    azureSubscription: 'ARMServiceConnection'
+    ScriptType: 'InlineScript'
+    Inline: |
+      #Authenticate to Azure
+      #Connect-AzAccount -UseDeviceAuthentication
 
       # Variables
       $apiUrl = 'https://www.microsoft.com/en-us/download/confirmation.aspx?id=56519'
