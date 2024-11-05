@@ -5,8 +5,8 @@ pool:
   
 # Variables
 $apiUrl = 'https://api-session-laserpro.dev.total-lending.com/Admin/IpAddresses'
-$storageAccountName = '${{ parameters.accountName }}'
-$resourceGroup = '${{ parameters.resourceGroup }}'
+$storageAccountName = 'samplestorageee1'
+$resourceGroup = 'DemoRG'
 # Fetch the IP addresses from the API
 Write-Host 'Fetching IP addresses from the API...'
 $response = Invoke-RestMethod -Uri $apiUrl -Method Get
