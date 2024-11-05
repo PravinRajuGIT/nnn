@@ -1,0 +1,49 @@
+trigger: none
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '6.x'
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Automaticserviceconnection'
+    scriptType: 'ps'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      # Authenticate to Azure
+      Connect-AzAccount -UseDeviceAuthentication
+
+      # Variables
+      $apiUrl = 'https://www.microsoft.com/en-us/download/confirmation.aspx?id=56519'
+      $storageAccountName = '${{ parameters.accountName }}'
+      $resourceGroup = '${{ parameters.resourceGroup }}'
+
+      # Fetch the IP addresses from the API
+      Write-Host 'Fetching IP addresses from the API...'
+      $response = Invoke-RestMethod -Uri $apiUrl -Method Get
+      if (-not $response) {
+          Write-Error 'Failed to retrieve IP addresses'
+          exit 1
+      }
+
+      # Filter IPs for United States
+      $usIps = $response | Where-Object { $_.region -eq 'United States' }
+
+      # Output the IPs for logging purposes
+      Write-Host 'US IP addresses retrieved: $($usIps | ConvertTo-Json)'
+
+      # Clear all existing IP rules from the storage account
+      Write-Host 'Clearing existing IP rules...'
+      az storage account network-rule remove --resource-group $resourceGroup --account-name $storageAccountName --ip-address '*'
+
+      # Loop through each IP and add it to the storage account network rules
+      foreach ($ip in $usIps) {
+          Write-Host "Adding IP: $ip to storage account network rules"
+          az storage account network-rule add --resource-group $resourceGroup --account-name $storageAccountName --ip-address $ip
+      }
