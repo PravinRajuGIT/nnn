@@ -12,7 +12,7 @@ steps:
 
 - task: AzurePowerShell@5
   inputs:
-    azureSubscription: 'ARMServiceConnection'
+    azureSubscription: 'Automaticserviceconnection'
     ScriptType: 'InlineScript'
     Inline: |
       #Authenticate to Azure
@@ -20,8 +20,8 @@ steps:
 
       # Variables
       $apiUrl = 'https://www.microsoft.com/en-us/download/confirmation.aspx?id=56519'
-      $storageAccountName = '${{ parameters.accountName }}'
-      $resourceGroup = '${{ parameters.resourceGroup }}'
+      $storageAccountName = 'samplestorageee1'
+      $resourceGroup = 'DemoRG'
 
       # Fetch the IP addresses from the API
       Write-Host 'Fetching IP addresses from the API...'
