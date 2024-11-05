@@ -1,0 +1,27 @@
+trigger: none
+
+pool:
+  vmImage: 'windows-latest
+  
+# Variables
+$apiUrl = 'https://api-session-laserpro.dev.total-lending.com/Admin/IpAddresses'
+$storageAccountName = '${{ parameters.accountName }}'
+$resourceGroup = '${{ parameters.resourceGroup }}'
+# Fetch the IP addresses from the API
+Write-Host 'Fetching IP addresses from the API...'
+$response = Invoke-RestMethod -Uri $apiUrl -Method Get
+if (-not $response) {
+    Write-Error 'Failed to retrieve IP addresses'
+    exit 1
+}
+# Output the IPs for logging purposes
+Write-Host 'IP addresses retrieved: $($response | ConvertTo-Json)'
+# Clear all existing IP rules from the storage account
+Write-Host 'Clearing existing IP rules...'
+az storage account network-rule remove --resource-group $resourceGroup --account-name $storageAccountName --ip-address '*'
+# Loop through each IP and add it to the storage account network rules
+foreach ($ip in $response) {
+    Write-Host "Adding IP: $ip to storage account network rules"
+    az storage account network-rule add --resource-group $resourceGroup --account-name $storageAccountName --ip-address $ip
+}
+has context menu
