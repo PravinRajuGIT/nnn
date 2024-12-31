@@ -1,0 +1,21 @@
+trigger: none
+
+resources:
+  repositories:
+  - repository: repotest
+    type: github
+    name: PravinRajuGIT/Repotest
+    endpoint: PATGitHUB
+
+# Adding a line to test CI trigger for a pipeline.
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- checkout: repotest
+  displayName: 'Checkout code from GitHub'
+
+- script: |
+    echo "Repository successfully checked out using the endpoint parameter."
+  displayName: 'Run a Script'
