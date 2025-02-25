@@ -1,0 +1,19 @@
+trigger: none
+
+resources:
+  repositories:
+  - repository: templatesRepo   # Alias for the external repo
+    type: git
+    name: testprojectB/templatesRepo     # Format: ProjectName/RepositoryName
+    ref: refs/heads/main        # Branch or tag reference
+
+jobs:
+- job: Build
+  displayName: "Build Job"
+  steps:
+    - checkout: self   # Check out Project A's repository
+    - checkout: templatesRepo  # Check out the external repository
+
+    - template: pipelines/build-template.yml@templatesRepo
+      parameters:
+        buildConfiguration: 'Release'
