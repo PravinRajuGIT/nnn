@@ -1,0 +1,21 @@
+trigger: none  # Prevents the pipeline from triggering automatically
+
+pool:
+  vmImage: 'ubuntu-latest'  # Use an agent to run the script
+
+steps:
+  - script: |
+      echo "Creating a new Git repository in Azure DevOps..."
+      
+      # Define variables
+      ORG_URL="https://dev.azure.com/$(System.TeamFoundationCollectionUri)"
+      PROJECT_NAME="$(System.TeamProject)"
+      REPO_NAME="NewRepo"  # Change this to your desired repo name
+      
+      # Call Azure DevOps API to create a repository
+      curl -X POST -H "Content-Type: application/json" \
+        -H "Authorization: Bearer $(System.AccessToken)" \
+        --data "{ \"name\": \"$REPO_NAME\" }" \
+        "$ORG_URL/$PROJECT_NAME/_apis/git/repositories?api-version=7.1-preview.1"
+      
+    displayName: "Create Git Repository"
