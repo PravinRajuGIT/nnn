@@ -1,0 +1,17 @@
+{
+	"name": "qialiacmktest",
+	"properties": {
+		"globalParameters": {
+			"testgp": {
+				"type": "int",
+				"value": 10
+			}
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "40b58a6f-3827-4c60-b54b-c5fb6dd0d4ea",
+		"tenantId": "16b3c013-d300-468d-ac64-7eda0820b6d3"
+	}
+}
