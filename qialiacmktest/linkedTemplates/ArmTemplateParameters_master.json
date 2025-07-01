@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "qialiacmktest"
 		},
+		"default_properties_testgp_value": {
+			"value": 10
+		},
 		"containerUri": {
 			"value": ""
 		},

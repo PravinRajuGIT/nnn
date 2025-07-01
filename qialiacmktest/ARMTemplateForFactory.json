@@ -6,6 +6,10 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "qialiacmktest"
+		},
+		"default_properties_testgp_value": {
+			"type": "int",
+			"defaultValue": 10
 		}
 	},
 	"variables": {
@@ -36,6 +40,18 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2025-07-01T09:16:29Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/default')]",
+			"type": "Microsoft.DataFactory/factories/globalparameters",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"testgp": {
+					"type": "int",
+					"value": "[parameters('default_properties_testgp_value')]"
+				}
 			},
 			"dependsOn": []
 		}

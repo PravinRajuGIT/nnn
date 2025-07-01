@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "qialiacmktest"
 		},
+		"default_properties_testgp_value": {
+			"type": "int",
+			"defaultValue": 10
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -33,6 +37,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"default_properties_testgp_value": {
+						"value": "[parameters('default_properties_testgp_value')]"
 					}
 				}
 			},

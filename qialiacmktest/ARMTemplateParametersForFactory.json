@@ -4,6 +4,9 @@
 	"parameters": {
 		"factoryName": {
 			"value": "qialiacmktest"
+		},
+		"default_properties_testgp_value": {
+			"value": 10
 		}
 	}
 }
