@@ -16,3 +16,4 @@ Update 14
 Update 15
 Update 16 - New
 Update 17 - New - Copy file task
+Update 18 - Copy file task with Overwrite option enabled.
