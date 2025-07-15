@@ -1,0 +1,38 @@
+trigger: none
+
+pool:
+ vm-Image: windows-latest
+
+stages:
+- stage: Stage1
+  displayName: "Build Stage"
+  jobs:
+  - job: BuildJob
+    steps:
+    - script: echo "Executing Stage 1 - Build"
+      displayName: "Run Build Step"
+
+- stage: Stage2
+  displayName: "Test Stage"
+  jobs:
+  - job: TestJob
+    steps:
+    - script: echo "Executing Stage 2 - Tests"
+      displayName: "Run Test Step"
+
+- stage: Stage3
+  displayName: "Lint Stage"
+  jobs:
+  - job: LintJob
+    steps:
+    - script: echo "Executing Stage 3 - Lint"
+      displayName: "Run Lint Step"
+
+- stage: Stage4
+  displayName: "Deploy Stage"
+  dependsOn: Stage1
+  jobs:
+  - job: DeployJob
+    steps:
+    - script: echo "Executing Stage 4 - Deploy"
+      displayName: "Run Deploy Step"
