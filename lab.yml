@@ -1,7 +1,7 @@
 trigger: none
 
 pool:
- vm-Image: windows-latest
+ vmImage: windows-latest
 
 stages:
 - stage: Stage1
