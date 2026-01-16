@@ -1,0 +1,14 @@
+trigger: none
+
+stages:
+- stage: Approval
+  displayName: "Manual Approval Stage"
+  jobs:
+  - job: ManualValidationJob
+    displayName: "Wait for manual approval"
+    pool: server
+    steps:
+    - task: ManualValidation@0
+      inputs:
+        instructions: "Please approve to continue the pipeline."
+        timeoutInMinutes: 60
