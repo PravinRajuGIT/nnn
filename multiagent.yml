@@ -1,0 +1,13 @@
+trigger: none
+
+jobs:
+- job: ParallelJob
+  strategy:
+    parallel: 3   # run the SAME job on 3 agents
+
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  steps:
+  - script: echo "Running on agent $(System.JobPositionInPhase)"
+    displayName: 'Parallel execution'
