@@ -1,0 +1,10 @@
+trigger: none
+
+jobs:
+- job: EnvVarDemo
+  steps:
+  - script: |
+      echo "Environment name is: $ENV_NAME"
+      echo "Build ID is: $BUILD_BUILDID"
+    env:
+      ENV_NAME: dev
