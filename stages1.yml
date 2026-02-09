@@ -61,3 +61,4 @@ stages:
 #Adding line 6 WHILE THE CURRENT PIPELINE IS IN PROGRESS
 #adding line 7 and associating this change with work item id:330 (issue work item type) - missed while commiting the change
 #adding line 8 and associating this change with work item id:330 (issue work item type)
+#Adding line 9 and associating this change with the same work item id: 330
