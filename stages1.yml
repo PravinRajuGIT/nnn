@@ -63,3 +63,4 @@ stages:
 #adding line 8 and associating this change with work item id:330 (issue work item type)
 #Adding line 9 and associating this change with the same work item id: 330
 #Adding line 10 and associating this change to new work item id: 331 (issue work item type)
+#Removed the line 11 and now readding it with a new commit id.
