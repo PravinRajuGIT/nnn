@@ -35,3 +35,5 @@ stages:
     steps:
     - script: echo "Deploying application..."
       displayName: "Deploy Step"
+
+#Adding a line to check the issue scenario - Lab environment
