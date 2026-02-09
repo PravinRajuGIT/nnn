@@ -1,50 +1,54 @@
 trigger: none
+
 stages:
-# ------------------------
-# STAGE 1 – AUTO RUN
-# ------------------------
+# -------------------------
+# STAGE 1 – BUILD
+# -------------------------
 - stage: Build
   displayName: "Stage 1 - Build"
   jobs:
-  - job: BuildJob
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - script: echo "Build completed"
-      displayName: "Build Step"
+  - deployment: BuildDeployment
+    displayName: "Build Job"
+    environment: Build-Env
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo "Build stage executed"
+            displayName: "Build Step"
 
-# ------------------------
-# STAGE 2 – MANUAL APPROVAL
-# ------------------------
+# -------------------------
+# STAGE 2 – TEST (Approval)
+# -------------------------
 - stage: Test
-  displayName: "Stage 2 - Test (Manual Approval)"
+  displayName: "Stage 2 - Test"
   dependsOn: Build
   condition: succeeded()
   jobs:
   - deployment: TestDeployment
-    displayName: "Test Deployment"
+    displayName: "Test Job"
     environment: Test-Env
     strategy:
       runOnce:
         deploy:
           steps:
-          - script: echo "Running tests after approval"
+          - script: echo "Test stage executed after approval"
             displayName: "Test Step"
 
-# ------------------------
-# STAGE 3 – MANUAL APPROVAL
-# ------------------------
+# -------------------------
+# STAGE 3 – DEPLOY (Approval)
+# -------------------------
 - stage: Deploy
-  displayName: "Stage 3 - Deploy (Manual Approval)"
+  displayName: "Stage 3 - Deploy"
   dependsOn: Test
   condition: succeeded()
   jobs:
   - deployment: DeployDeployment
-    displayName: "Deploy Deployment"
+    displayName: "Deploy Job"
     environment: Prod-Env
     strategy:
       runOnce:
         deploy:
           steps:
-          - script: echo "Deploying to production after approval"
+          - script: echo "Production deployment executed after approval"
             displayName: "Deploy Step"
