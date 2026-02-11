@@ -1,3 +1,14 @@
+Nice, this pipeline is already structured correctly 👍
+You just need to explicitly add the repository checkout step.
+
+In Azure DevOps YAML, repo checkout is done using:
+
+- checkout: self
+
+
+Below is your same pipeline, with checkout added to each stage (best practice so every stage has the source code available).
+
+✅ Updated YAML with checkout: self
 trigger: none
 
 stages:
@@ -14,6 +25,9 @@ stages:
       runOnce:
         deploy:
           steps:
+          - checkout: self
+            displayName: "Checkout source code"
+
           - script: echo "Build stage executed"
             displayName: "Build Step"
 
@@ -32,6 +46,9 @@ stages:
       runOnce:
         deploy:
           steps:
+          - checkout: self
+            displayName: "Checkout source code"
+
           - script: echo "Test stage executed after approval"
             displayName: "Test Step"
 
@@ -50,6 +67,9 @@ stages:
       runOnce:
         deploy:
           steps:
+          - checkout: self
+            displayName: "Checkout source code"
+
           - script: echo "Production deployment executed after approval"
             displayName: "Deploy Step"
 
