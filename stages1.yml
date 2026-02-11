@@ -1,5 +1,15 @@
 trigger: none
 
+resources:
+  repositories:
+  - repository: mmm
+    type: git
+    name: mmm
+
+  - repository: nnn
+    type: git
+    name: nnn
+
 stages:
 # -------------------------
 # STAGE 1 – BUILD
@@ -15,9 +25,18 @@ stages:
         deploy:
           steps:
           - checkout: self
-            displayName: "Checkout source code"
+            displayName: "Checkout primary repo"
 
-          - script: echo "Build stage executed"
+          - checkout: mmm
+            displayName: "Checkout mmm repo"
+
+          - checkout: nnn
+            displayName: "Checkout nnn repo"
+
+          - script: |
+              echo "Build stage executed"
+              echo "Repos available under:"
+              echo "$(Pipeline.Workspace)"
             displayName: "Build Step"
 
 # -------------------------
@@ -36,7 +55,13 @@ stages:
         deploy:
           steps:
           - checkout: self
-            displayName: "Checkout source code"
+            displayName: "Checkout primary repo"
+
+          - checkout: mmm
+            displayName: "Checkout mmm repo"
+
+          - checkout: nnn
+            displayName: "Checkout nnn repo"
 
           - script: echo "Test stage executed after approval"
             displayName: "Test Step"
@@ -57,7 +82,13 @@ stages:
         deploy:
           steps:
           - checkout: self
-            displayName: "Checkout source code"
+            displayName: "Checkout primary repo"
+
+          - checkout: mmm
+            displayName: "Checkout mmm repo"
+
+          - checkout: nnn
+            displayName: "Checkout nnn repo"
 
           - script: echo "Production deployment executed after approval"
             displayName: "Deploy Step"
