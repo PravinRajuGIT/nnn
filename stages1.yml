@@ -1,0 +1,108 @@
+trigger: none
+
+resources:
+  repositories:
+  - repository: mmm
+    type: git
+    name: mmm
+
+  - repository: nnn
+    type: git
+    name: nnn
+
+stages:
+# -------------------------
+# STAGE 1 – BUILD
+# -------------------------
+- stage: Build
+  displayName: "Stage 1 - Build"
+  jobs:
+  - deployment: BuildDeployment
+    displayName: "Build Job"
+    environment: Build-Env
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+            displayName: "Checkout primary repo"
+
+          - checkout: mmm
+            displayName: "Checkout mmm repo"
+
+          - checkout: nnn
+            displayName: "Checkout nnn repo"
+
+          - script: |
+              echo "Build stage executed"
+              echo "Repos available under:"
+              echo "$(Pipeline.Workspace)"
+            displayName: "Build Step"
+
+# -------------------------
+# STAGE 2 – TEST (Approval)
+# -------------------------
+- stage: Test
+  displayName: "Stage 2 - Test"
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+  - deployment: TestDeployment
+    displayName: "Test Job"
+    environment: Test-Env
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+            displayName: "Checkout primary repo"
+
+          - checkout: mmm
+            displayName: "Checkout mmm repo"
+
+          - checkout: nnn
+            displayName: "Checkout nnn repo"
+
+          - script: echo "Test stage executed after approval"
+            displayName: "Test Step"
+
+# -------------------------
+# STAGE 3 – DEPLOY (Approval)
+# -------------------------
+- stage: Deploy
+  displayName: "Stage 3 - Deploy"
+  dependsOn: Test
+  condition: succeeded()
+  jobs:
+  - deployment: DeployDeployment
+    displayName: "Deploy Job"
+    environment: Prod-Env
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+            displayName: "Checkout primary repo"
+
+          - checkout: mmm
+            displayName: "Checkout mmm repo"
+
+          - checkout: nnn
+            displayName: "Checkout nnn repo"
+
+          - script: echo "Production deployment executed after approval"
+            displayName: "Deploy Step"
+
+#Added a line for the test
+#Adding Line 2
+#Adding Line 3
+#Addign Line 4
+#aDDING lINE 5
+#Adding line 6 WHILE THE CURRENT PIPELINE IS IN PROGRESS
+#adding line 7 and associating this change with work item id:330 (issue work item type) - missed while commiting the change
+#adding line 8 and associating this change with work item id:330 (issue work item type)
+#Adding line 9 and associating this change with the same work item id: 330
+#Adding line 10 and associating this change to new work item id: 331 (issue work item type)
+#Removed the line 11 and now readding it with a new commit id.
+#Adding line 12 to test the action item - source version related check
+#Adding line 13

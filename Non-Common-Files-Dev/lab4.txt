@@ -1,0 +1,27 @@
+File creation
+Update 1
+Update 2
+Update 3
+Update 4
+Update 5
+Update 6
+Update 7
+Update 8
+Update 9
+Update 10
+Update 11
+Update 12
+Update 13
+Update 14
+Update 15
+Update 16 - New
+Update 17 - New - Copy file task
+Update 18 - Copy file task with Overwrite option enabled.
+
+Update 19 - 7/7/2025
+Using the custom powershell script cx shared.
+
+Update 20
+update 21
+update 22 - So there are 4 commits from update 19 TO UPDATE 22 in this lab4.txt. Now I am going to make use of powershell script shared by cx
+Update 23 - Now cx's powershell script will be used to evaluate the commit of update 23 and update 22.

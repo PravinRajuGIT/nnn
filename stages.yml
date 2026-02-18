@@ -1,0 +1,39 @@
+trigger: none
+
+stages:
+- stage: Build
+  displayName: "Build Stage"
+  jobs:
+  - job: BuildJob
+    displayName: "Build Job"
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo "Building the application..."
+      displayName: "Build Step"
+
+- stage: Test
+  displayName: "Test Stage"
+  dependsOn: Build
+  jobs:
+  - job: TestJob
+    displayName: "Test Job"
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo "Running tests..."
+      displayName: "Test Step"
+
+- stage: Deploy
+  displayName: "Deploy Stage"
+  dependsOn: Test
+  jobs:
+  - job: DeployJob
+    displayName: "Deploy Job"
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo "Deploying application..."
+      displayName: "Deploy Step"
+
+#Adding a line to check the issue scenario - Lab environment

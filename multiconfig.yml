@@ -1,0 +1,17 @@
+trigger: none
+
+jobs:
+- job: Build_Matrix
+  strategy:
+    matrix:
+      windows:
+        vmImage: 'windows-latest'
+      linux:
+        vmImage: 'ubuntu-latest'
+
+  pool:
+    vmImage: $(vmImage)
+
+  steps:
+  - script: echo "Running on $(vmImage)"
+    displayName: 'Print OS'

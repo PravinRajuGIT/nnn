@@ -1,0 +1,11 @@
+trigger: none
+
+pool:
+  name: 'Hosted Windows 2019 with VS2019'
+
+steps:
+- script: |
+    echo Hello from Hosted Windows 2019 with VS2019
+    echo Agent OS:
+    ver
+  displayName: 'Run on Hosted Windows 2019 with VS2019'

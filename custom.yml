@@ -1,0 +1,39 @@
+trigger: none  # Or specify your branch
+
+pool:
+  name: 'Default'  # Replace with your agent pool name
+
+variables:
+  SiteName: 'MyWebsite'  # Replace with your site name
+  NetworkPath: '\\server\path\to\App_Data'  # Replace with your network path
+  VDAuthUserName: '$(localAccountUsername)'  # Securely set in Azure DevOps
+  VDAuthUserPassword: '$(localAccountPassword)'  # Securely set in Azure DevOps
+
+steps:
+- task: IISWebAppManagementOnMachineGroup@0
+  displayName: 'Create App_Data Virtual Folder'
+  inputs:
+    IISDeploymentType: 'IISVirtualDirectory'
+    WebsiteName: '$(SiteName)'
+    ParentWebsiteNameForVD: '$(SiteName)'
+    VirtualPathForVD: '/App_Data'
+    PhysicalPathForVD: '$(NetworkPath)'
+    # No authentication parameters here, handled in the next step
+
+- powershell: |
+    # Define the path to appcmd.exe
+    $appcmdPath = "$env:windir\system32\inetsrv\appcmd.exe"
+    
+    # Fetch the username and password from Azure DevOps pipeline variables
+    $username = "$(VDAuthUserName)"
+    $password = "$(VDAuthUserPassword)"
+    
+    # Enable Windows Authentication for the Virtual Directory
+    & $appcmdPath set config "Default Web Site/App_Data" /section:windowsAuthentication /enabled:true
+    
+    # Disable anonymous authentication and set the credentials for the virtual directory
+    & $appcmdPath set config "Default Web Site/App_Data" /section:system.webServer/security/authentication/anonymousAuthentication /enabled:false
+    & $appcmdPath set config "Default Web Site/App_Data" /section:system.webServer/security/authentication/anonymousAuthentication /userName:$username /password:$password /commit:apphost
+  displayName: 'Set Windows Authentication for App_Data Virtual Folder'
+  failOnStderr: true  # Ensure the task fails if there is an error
+
